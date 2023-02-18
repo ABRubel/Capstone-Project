@@ -1,9 +1,15 @@
 import React from "react";
+import { Context } from "../Context";
+import { getClass } from "../utils";
+import Image from "../components/Image";
 
 function Photos() {
+  const { allPhotos } = React.useContext(Context);
   return (
     <main className="photos">
-      <h1>Images go here</h1>
+      {allPhotos.map((photo, index) => (
+        <Image key={photo.id} img={photo} className={getClass(index)} />
+      ))}
     </main>
   );
 }
