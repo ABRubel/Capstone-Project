@@ -12,16 +12,15 @@ function ContextProvider({ children }) {
       .then((res) => res.json())
       .then((data) => setAllPhotos(data));
   }
-  function toggleFavourite(id) {
+  function toggleFavorite(id) {
     const updatedPhotos = allPhotos.map((photo) => {
       if (photo.id === id) {
-        console.log(id);
-        console.log(!photo.isFavourite);
-        return { ...photo, isFavourite: !photo.isFavourite };
+        return { ...photo, isFavorite: !photo.isFavorite };
       }
       return photo;
     });
     setAllPhotos(updatedPhotos);
+    console.log(updatedPhotos);
   }
   const {
     status,
@@ -34,7 +33,7 @@ function ContextProvider({ children }) {
   if (status === "loading") return <h1>Loading ...</h1>;
   if (status === "error ") return <h1>{JSON.stringify(error)}</h1>;
   return (
-    <Context.Provider value={{ allPhotos, toggleFavourite }}>
+    <Context.Provider value={{ allPhotos, toggleFavorite }}>
       {children}
     </Context.Provider>
   );
