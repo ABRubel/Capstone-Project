@@ -1,8 +1,15 @@
 import React from "react";
+import { Context } from "../Context";
 
 function Image({ className, img }) {
   const [hover, setHover] = React.useState(false);
-  const heartIcon = hover && <i className="ri-heart-line favorite"></i>;
+  const { toggleFavourite } = React.useContext(Context);
+  const heartIcon = hover && (
+    <i
+      className="ri-heart-line favorite"
+      onClick={() => toggleFavourite(img.id)}
+    ></i>
+  );
   const cartIcon = hover && <i className="ri-add-circle-line cart"></i>;
   return (
     <div
