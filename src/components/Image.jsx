@@ -10,6 +10,7 @@ function Image({ className, img }) {
   const { addToCart } = React.useContext(Context);
   const { loadingStatus } = React.useContext(Context);
   const { cartItems } = React.useContext(Context);
+  const { removeFromCart } = React.useContext(Context);
 
   function heartIcon() {
     if (img.isFavorite) {
@@ -34,7 +35,7 @@ function Image({ className, img }) {
       return (
         <i
           className="ri-shopping-cart-fill cart"
-          onClick={() => toggleFavorite(img.id)}
+          onClick={() => removeFromCart(img.id)}
         ></i>
       );
     } else if (hover) {
