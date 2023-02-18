@@ -35,10 +35,11 @@ function ContextProvider({ children }) {
     queryKey: ["allPhotos"],
     queryFn: getPhotos,
   });
-  if (status === "loading") return <h1>Loading ...</h1>;
-  if (status === "error ") return <h1>{JSON.stringify(error)}</h1>;
+
   return (
-    <Context.Provider value={{ allPhotos, toggleFavorite, addToCart }}>
+    <Context.Provider
+      value={{ allPhotos, toggleFavorite, addToCart, loadingStatus: status }}
+    >
       {children}
     </Context.Provider>
   );

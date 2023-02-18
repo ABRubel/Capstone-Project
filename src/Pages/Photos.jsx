@@ -3,6 +3,7 @@ import { Context } from "../Context";
 import { getClass } from "../utils";
 import Image from "../components/Image";
 
+
 function Photos() {
   const { allPhotos } = React.useContext(Context);
   return (

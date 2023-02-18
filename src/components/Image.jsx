@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Context } from "../Context";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function Image({ className, img }) {
   const [hover, setHover] = React.useState(false);
   const { toggleFavorite } = React.useContext(Context);
   const { addToCart } = React.useContext(Context);
+  const { loadingStatus } = React.useContext(Context);
+
   function heartIcon() {
     if (img.isFavorite) {
       return (
@@ -26,6 +30,15 @@ function Image({ className, img }) {
   const cartIcon = hover && (
     <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
   );
+  if (loadingStatus === "loading") {
+    // setTimeout(() => console.log("loading"), 5000);
+    return (
+      <div>
+        <Skeleton variant="rounded" width={180} height={120} animation="wave" />
+      </div>
+    );
+  }
+  if (loadingStatus === "error ") return <h1>{JSON.stringify(error)}</h1>;
   return (
     <div
       className={`${className} image-container`}
