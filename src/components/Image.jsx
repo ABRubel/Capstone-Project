@@ -5,9 +5,9 @@ import { Context } from "../Context";
 function Image({ className, img }) {
   const [hover, setHover] = React.useState(false);
   const { toggleFavorite } = React.useContext(Context);
+  const { addToCart } = React.useContext(Context);
   function heartIcon() {
     if (img.isFavorite) {
-      console.log(img);
       return (
         <i
           className="ri-heart-fill favorite"
@@ -23,7 +23,9 @@ function Image({ className, img }) {
       );
     }
   }
-  const cartIcon = hover && <i className="ri-add-circle-line cart"></i>;
+  const cartIcon = hover && (
+    <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
+  );
   return (
     <div
       className={`${className} image-container`}

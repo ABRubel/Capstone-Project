@@ -5,6 +5,8 @@ const Context = React.createContext();
 
 function ContextProvider({ children }) {
   const [allPhotos, setAllPhotos] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
   function getPhotos() {
     const url =
       "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json";
@@ -22,6 +24,9 @@ function ContextProvider({ children }) {
     setAllPhotos(updatedPhotos);
     console.log(updatedPhotos);
   }
+  function addToCart(newItem) {
+    setCartItems((prevItems) => [...prevItems, newItem]);
+  }
   const {
     status,
     error,
@@ -33,7 +38,7 @@ function ContextProvider({ children }) {
   if (status === "loading") return <h1>Loading ...</h1>;
   if (status === "error ") return <h1>{JSON.stringify(error)}</h1>;
   return (
-    <Context.Provider value={{ allPhotos, toggleFavorite }}>
+    <Context.Provider value={{ allPhotos, toggleFavorite, addToCart }}>
       {children}
     </Context.Provider>
   );
