@@ -9,6 +9,7 @@ function Image({ className, img }) {
   const { toggleFavorite } = React.useContext(Context);
   const { addToCart } = React.useContext(Context);
   const { loadingStatus } = React.useContext(Context);
+  const { cartItems } = React.useContext(Context);
 
   function heartIcon() {
     if (img.isFavorite) {
@@ -27,9 +28,24 @@ function Image({ className, img }) {
       );
     }
   }
-  const cartIcon = hover && (
-    <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
-  );
+  function cartIcon() {
+    const found = cartItems.some((item) => item.id === img.id);
+    if (found) {
+      return (
+        <i
+          className="ri-shopping-cart-fill cart"
+          onClick={() => toggleFavorite(img.id)}
+        ></i>
+      );
+    } else if (hover) {
+      return (
+        <i
+          className="ri-add-circle-line cart"
+          onClick={() => addToCart(img)}
+        ></i>
+      );
+    }
+  }
   if (loadingStatus === "loading") {
     // setTimeout(() => console.log("loading"), 5000);
     return (
@@ -47,7 +63,7 @@ function Image({ className, img }) {
     >
       <img className="image-grid" src={img.url} alt="" />
       {heartIcon()}
-      {cartIcon}
+      {cartIcon()}
     </div>
   );
 }
