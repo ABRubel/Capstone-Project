@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Context } from "../Context";
 
 function Image({ className, img }) {
@@ -36,4 +37,12 @@ function Image({ className, img }) {
   );
 }
 
+Image.propTypes = {
+  className: PropTypes.string,
+  img: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  }),
+};
 export default Image;
