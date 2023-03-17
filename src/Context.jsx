@@ -30,6 +30,10 @@ function ContextProvider({ children }) {
   function addToCart(newItem) {
     setCartItems((prevItems) => [...prevItems, newItem]);
   }
+
+  function emptyCart() {
+    setCartItems([]);
+  }
   const {
     status,
     error,
@@ -48,6 +52,7 @@ function ContextProvider({ children }) {
         loadingStatus: status,
         cartItems,
         removeFromCart,
+        emptyCart,
       }}
     >
       {children}
