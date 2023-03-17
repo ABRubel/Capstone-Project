@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { Context } from "../Context";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import useHover from "../hooks/useHover";
 
 function Image({ className, img }) {
-  const [hover, setHover] = React.useState(false);
+  const [hover, ref] = useHover();
   const { toggleFavorite } = React.useContext(Context);
   const { addToCart } = React.useContext(Context);
   const { loadingStatus } = React.useContext(Context);
@@ -57,11 +58,7 @@ function Image({ className, img }) {
   }
   if (loadingStatus === "error ") return <h1>{JSON.stringify(error)}</h1>;
   return (
-    <div
-      className={`${className} image-container`}
-      onMouseOver={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
+    <div className={`${className} image-container`} ref={ref}>
       <img className="image-grid" src={img.url} alt="" />
       {heartIcon()}
       {cartIcon()}

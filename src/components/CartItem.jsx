@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Context } from "../Context";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import useHover from "../hooks/useHover";
 
 function CartItem({ item }) {
-  const [hover, setHover] = useState(false);
+  const [hover, ref] = useHover();
   const deleteBtnClass = hover ? "ri-delete-bin-fill" : "ri-delete-bin-line";
   const { removeFromCart } = React.useContext(Context);
   const MySwal = withReactContent(Swal);
@@ -32,8 +33,7 @@ function CartItem({ item }) {
         style={{ color: "red" }}
         className={deleteBtnClass}
         onClick={() => handleDelete(item.id)}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+        ref={ref}
       ></i>
       <img src={item.url} width="130px" />
       <p>$5.99</p>
